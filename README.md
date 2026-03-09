@@ -29,13 +29,6 @@
 <img src="https://img.shields.io/badge/RaspberryPi-C51A4A?style=flat&logo=raspberrypi&logoColor=white" />  
 
 <br>
-
-### 💾 Github Stats
-<div style="display: flex; justify-content: center; gap: 20px;">
-  <img align="center" style="height:130px" src="https://github-readme-stats.vercel.app/api?username=DevLucia-21&show_icons=true&count_private=true&theme=city_lights" />
-  <img align="center" style="height:130px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=DevLucia-21&layout=compact&show_icons=true&show_owner=true&count_private=true&theme=city_lights" />
-</div>
-
 <br>
 
 ![footer](https://capsule-render.vercel.app/api?type=waving&color=A9B5DF&height=120&section=footer&fontSize=30&fontAlignY=30&animation=twinkling)

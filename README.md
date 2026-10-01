@@ -21,6 +21,7 @@ Java와 Spring Boot를 중심으로 백엔드 개발을 공부하고 있습니�
   <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white"/>
   <img src="https://img.shields.io/badge/Spring_Data_JPA-6DB33F?style=flat-square&logo=spring&logoColor=white"/>
   <img src="https://img.shields.io/badge/Spring_Security-6DB33F?style=flat-square&logo=springsecurity&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=kotlin&logoColor=white"/>
 </p>
 
 ### Database & Platform
@@ -45,7 +46,6 @@ Java와 Spring Boot를 중심으로 백엔드 개발을 공부하고 있습니�
 ### Other
 
 <p>
-  <img src="https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=kotlin&logoColor=white"/>
   <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white"/>
   <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white"/>
   <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white"/>
@@ -55,27 +55,31 @@ Java와 Spring Boot를 중심으로 백엔드 개발을 공부하고 있습니�
 
 ## 🚀 Featured Projects
 
-### 🛒 [Gudit](https://github.com/prgrms-be-devcourse/NBE11-13-2-Team03)
+### 🛒 [Gudit (구딧)](https://github.com/prgrms-be-devcourse/NBE11-13-3-Team03)
 **한정 수량 굿즈의 안정적인 선착순 구매와 결제를 위한 타임세일 서비스**
 
-`Java` `Spring Boot` `PostgreSQL` `Redis` `Toss Payments` `k6`
+`Java` `Kotlin` `Spring Boot` `PostgreSQL` `Redis` `Redis Streams` `Toss Payments` `k6`
 
 **담당**
-- Purchase · Payment 도메인
-- 결제 승인·취소 흐름
-- 결제 동시성 및 데이터 정합성 테스트
+- Purchase · Payment 도메인 및 Toss Payments 결제 흐름
+- 결제 동시성 · 데이터 정합성 테스트 및 문제 개선
+- 재고 복구 · 결제 보상 실패에 대한 비동기 재처리
+- AI 고객 문의 분석 워크플로
+- Purchase · Payment · Outbox · CS 도메인 Kotlin 전환
 
 **주요 경험**
-- Redis와 Lua Script를 활용한 재고 차감 및 복구 처리
-- Purchase · Payment 상태 전이에 비관적 락을 적용해 동시 요청 제어
-- 외부 결제 승인 이후 내부 DB 처리 실패 시 Toss 자동 보상 취소 흐름 구현
-- 동일 결제 동시 요청을 k6로 재현해 **1건 성공 / 49건 정상 거절 / 비정상 응답 0건**으로 정합성 검증
+- 동일 Payment 동시 승인 문제를 분석하고 비관적 락과 락 획득 순서 통일을 적용해 **성공 10건 → 1건, 정상 거절 49건, 예상 밖 응답 0건**으로 개선
+- 결제 승인 · 구매 취소 경합에서 발생한 Deadlock과 Redis 재고 불일치를 분석하고, 락 순서 통일과 DB Commit 이후 재고 복구로 최종 상태 정합성 확보
+- Toss 승인 이후 내부 DB 처리 실패 시 자동 보상 취소를 적용하고, 보상 취소까지 실패하는 경우 Transactional Outbox · Redis Streams 기반 재처리 구조로 확장
+- Consumer 실패 시 Pending 메시지를 재처리하고 `eventId` 기반 멱등 처리로 동일 이벤트 재전달 시 중복 재고 복구 방지
+- 실제 구매 · 결제 상태를 기반으로 n8n · AI · Slack을 연동한 고객 문의 분석 및 답변 초안 워크플로 구현
+- Java → Kotlin 전환 후 기존 Purchase · Payment 상태 전이와 비동기 처리의 동작을 회귀 테스트로 검증
 
-🏆 **Programmers Devcourse 2차 프로젝트 최우수팀**
+🏆 **Programmers Devcourse 2차 · 3차 프로젝트 최우수팀**
 
 ---
 
-### 🌿 [Chaerok](https://github.com/team-chaerok/chaerok-be)
+### 🌿 [Chaerok (채록)](https://github.com/team-chaerok/chaerok-be)
 **충남 지역의 여행 경험을 필름처럼 기록하는 관광 서비스**
 
 `Java` `Spring Boot` `PostgreSQL` `OAuth2` `JWT` `TourAPI` `Kakao Local API` `Prometheus` `Grafana`
@@ -92,13 +96,15 @@ Java와 Spring Boot를 중심으로 백엔드 개발을 공부하고 있습니�
 - TOURISM · FOOD · CAFE_DESSERT 세 카테고리를 보장하는 추천 코스 검증 로직 구현
 - Render · Supabase 환경에서 백엔드를 배포하고 Spring Boot Actuator · Prometheus · Grafana 기반 서버 메트릭 모니터링 환경 구성
 - Render 환경의 JVM 메모리 제한과 외부 API Timeout 등 운영 이슈를 조정하며 안정성 개선
-- 현재 Google Play · App Store 심사 진행 중
+- 모바일 스토어 심사를 위한 테스트 계정 · 인증 · 운영 환경 대응
 
-**📱 2026 관광데이터 활용 공모전 웹·앱 개발 부문 참가**
+📱 **2026 관광데이터 활용 공모전 웹·앱 개발 부문 참가**  
+🍎 [App Store: 채록 - 충남 여행 기록](https://apps.apple.com/kr/app/채록-충남-여행-기록/id6807424163) 출시  
+▶️ Google Play 심사 승인 · 프로덕션 출시 준비 중
 
 ---
 
-### 🎵 [S:ote](https://github.com/dPdms21/sote-be)
+### 🎵 [S:ote (소트)](https://github.com/dPdms21/sote-be)
 **AI 감정 분석 기반 음악·챌린지 추천 일기 서비스**
 
 `Java` `Spring Boot` `PostgreSQL` `FastAPI` `JWT` `Firebase`
@@ -136,7 +142,7 @@ Java와 Spring Boot를 중심으로 백엔드 개발을 공부하고 있습니�
 ## 🏆 Awards & Activities
 
 ### Awards
-- **Programmers Devcourse 2차 프로젝트 최우수팀** — Gudit
+- **Programmers Devcourse 2차 · 3차 프로젝트 최우수팀** — Gudit
 - **2025 캡스톤 경진대회 아리상** — S:ote
 
 ### Activities

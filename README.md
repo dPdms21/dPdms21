@@ -55,7 +55,7 @@ Java와 Spring Boot를 중심으로 백엔드 개발을 공부하고 있습니�
 
 ## 🚀 Featured Projects
 
-### 🛒 [Gudit (구딧)](https://github.com/prgrms-be-devcourse/NBE11-13-3-Team03)
+### 🛒 [Gudit (구딧)](https://github.com/dPdms21/gudit-v2)
 **한정 수량 굿즈의 안정적인 선착순 구매와 결제를 위한 타임세일 서비스**
 
 `Java` `Kotlin` `Spring Boot` `PostgreSQL` `Redis` `Redis Streams` `Toss Payments` `k6`
@@ -63,17 +63,16 @@ Java와 Spring Boot를 중심으로 백엔드 개발을 공부하고 있습니�
 **담당**
 - Purchase · Payment 도메인 및 Toss Payments 결제 흐름
 - 결제 동시성 · 데이터 정합성 테스트 및 문제 개선
-- 재고 복구 · 결제 보상 실패에 대한 비동기 재처리
+- Transactional Outbox · Redis Streams 기반 실패 재처리
 - AI 고객 문의 분석 워크플로
 - Purchase · Payment · Outbox · CS 도메인 Kotlin 전환
 
 **주요 경험**
-- 동일 Payment 동시 승인 문제를 분석하고 비관적 락과 락 획득 순서 통일을 적용해 **성공 10건 → 1건, 정상 거절 49건, 예상 밖 응답 0건**으로 개선
-- 결제 승인 · 구매 취소 경합에서 발생한 Deadlock과 Redis 재고 불일치를 분석하고, 락 순서 통일과 DB Commit 이후 재고 복구로 최종 상태 정합성 확보
-- Toss 승인 이후 내부 DB 처리 실패 시 자동 보상 취소를 적용하고, 보상 취소까지 실패하는 경우 Transactional Outbox · Redis Streams 기반 재처리 구조로 확장
-- Consumer 실패 시 Pending 메시지를 재처리하고 `eventId` 기반 멱등 처리로 동일 이벤트 재전달 시 중복 재고 복구 방지
-- 실제 구매 · 결제 상태를 기반으로 n8n · AI · Slack을 연동한 고객 문의 분석 및 답변 초안 워크플로 구현
-- Java → Kotlin 전환 후 기존 Purchase · Payment 상태 전이와 비동기 처리의 동작을 회귀 테스트로 검증
+- 동일 Payment 동시 승인 문제에 비관적 락과 락 획득 순서 통일을 적용해 **중복 성공 9건 → 0건, 정상 승인 1건 · 정상 거절 49건 · 예상 밖 응답 0건**으로 개선
+- 결제 승인 · 구매 취소 경합에서 발생한 **Deadlock과 Redis·DB 상태 불일치**를 분석하고, 락 순서 통일과 DB Commit 이후 재고 복구로 정합성 확보
+- DB Commit 이후 Redis 복구 실패 가능성을 해결하기 위해 **Transactional Outbox · Redis Streams 기반 재처리 구조**로 확장하고, Pending 재처리와 `eventId` 기반 멱등 처리 적용
+- Toss 승인 후 내부 처리와 보상 취소까지 실패하는 경우 **보상 요청을 Outbox에 저장하고 실제 Toss 상태를 재조회해 복구**하도록 개선
+- Production 코드의 **98.1%를 Kotlin으로 전환한 프로젝트에서 Purchase · Payment · Outbox · CS 및 관련 테스트 전환을 담당**하고, 기존 동시성 시나리오와 테스트로 기능 · 정합성 회귀 여부 검증
 
 🏆 **Programmers Devcourse 2차 · 3차 프로젝트 최우수팀**
 
